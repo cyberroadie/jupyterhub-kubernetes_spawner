@@ -227,7 +227,7 @@ class KubernetesSpawner(Spawner):
         return ip, self.container_port
 
     def get_pod(self):
-        return self.client.get_pod(self.pod_name)
+        return self.client.get_pod(self.pod_name, self.namespace)
 
     @property
     def pod_name(self):
@@ -260,7 +260,7 @@ class KubernetesSpawner(Spawner):
             ip = self.hub_ip
             port = self.hub_port
         elif self.hub_ip_from_service:
-            api_service = self.client.get_service(self.hub_ip_from_service)
+            api_service = self.client.get_service(self.hub_ip_from_service, self.namespace)
             ip = api_service.status.load_balancer.ingress[0].ip
             port = None
         else:
@@ -297,4 +297,4 @@ class KubernetesSpawner(Spawner):
 
     @gen.coroutine
     def stop(self):
-        self.client.delete_pod(self.pod_name)
+        self.client.delete_pod(self.pod_name, self.namespace)
