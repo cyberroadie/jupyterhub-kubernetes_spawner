@@ -186,7 +186,7 @@ class KubernetesSpawner(Spawner):
         pod = self.get_pod()
 
         if pod is None:
-            self.log.debug("Pod '%s' NOT found. Creating it...", self.pod_name)
+            self.log.debug("Pod '%s' NOT found. Creating it in namespace '%s'...", self.pod_name, self.namespace)
 
             new_pod = Pod(name=self.pod_name)
 
