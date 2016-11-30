@@ -66,3 +66,5 @@ local_settings.py
 
 jupyterhub.sqlite
 jupyterhub_cookie_secret
+
+.idea/
