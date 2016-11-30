@@ -15,6 +15,7 @@ class KubernetesSpawner(Spawner):
     username = Unicode("", config=True, help="Kubernetes HTTP/REST API username")
     password = Unicode("", config=True, help="Kubernetes HTTP/REST API password")
     verify_ssl = Bool(True, config=True, help="Kubernetes HTTP/REST API use ssl")
+    namespace = Unicode("default", config=True, help="Kubernetes namespace the pod is running in")
 
     pod_name_prefix = Unicode(
         "jupyterhub",
@@ -213,7 +214,7 @@ class KubernetesSpawner(Spawner):
             container.add_volume(vol_name, volume_path)
             new_pod.add_container(container)
 
-            self.client.launch_pod(new_pod)
+            self.client.launch_pod(new_pod, self.namespace)
             pod = yield self.wait_for_new_pod()
         else:
             self.log.debug("Pod '%s' FOUND", self.pod_name)
