@@ -22097,11 +22097,11 @@ class ApivApi(object):
         # Authentication setting
         auth_settings = []
 
-        self.log.debug("API call: resource_path %s", resource_path)
-        self.log.debug("API call: body %s", body_params)
-        self.log.debug("API call: query_params %s", query_params)
-        self.log.debug("API call: path_params %s", path_params)
-        self.log.debug("API call: form_params %s", form_params)
+        sys.stdout.write("API call: resource_path %s" % resource_path)
+        sys.stdout.write("API call: body %s" % body_params)
+        sys.stdout.write("API call: query_params %s" % query_params)
+        sys.stdout.write("API call: path_params %s" % path_params)
+        sys.stdout.write("API call: form_params %s" % form_params)
         
         return self.api_client.call_api(resource_path, 'GET',
                                             path_params,
