@@ -260,6 +260,7 @@ class KubernetesSpawner(Spawner):
             ip = self.hub_ip
             port = self.hub_port
         elif self.hub_ip_from_service:
+            self.log.debug("Get API service with %s", self.hub_ip_from_service, self.namespace)
             api_service = self.client.get_service(self.hub_ip_from_service, self.namespace)
             self.log.debug("API service %s", api_service)
             ip = api_service.status.load_balancer.ingress[0].ip
